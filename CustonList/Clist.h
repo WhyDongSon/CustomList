@@ -1,6 +1,7 @@
 #pragma once
-#include "Cnode.h"
-#include "Cliterator.h"
+
+class Cnode;
+class Cliterator;
 
 template<typename T>
 class Clist
@@ -10,8 +11,9 @@ class Clist
 	virtual ~Clist();
 	
 private:
-	Cnode<T>*		Dumynode;
-	Cliterator  iterator;
+	Cnode* firstDumynode = nullptr;
+	Cnode* endDumynode = nullptr;
+	Cliterator* iterator;
 	int			nSise;
 };
 
