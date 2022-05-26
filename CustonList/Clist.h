@@ -15,5 +15,6 @@ private:
 	Cnode* endDumynode = nullptr;
 	Cliterator* iterator;
 	int			nSise;
+	int			nSise;
 };
 
