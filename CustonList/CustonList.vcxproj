@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Clist.cpp" />
-    <ClCompile Include="Cliterator.cpp" />
+    <ClCompile Include="Citerator.cpp" />
     <ClCompile Include="Cnode.cpp" />
     <ClCompile Include="CustonList.cpp" />
     <ClCompile Include="pch.cpp">
@@ -151,7 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clist.h" />
-    <ClInclude Include="Cliterator.h" />
+    <ClInclude Include="Citerator.h" />
     <ClInclude Include="Cnode.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>

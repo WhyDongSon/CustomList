@@ -12,7 +12,7 @@
     <ClCompile Include="Clist.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Cliterator.cpp">
+    <ClCompile Include="Citerator.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Cnode.cpp">
@@ -29,7 +29,7 @@
     <ClInclude Include="Clist.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="Cliterator.h">
+    <ClInclude Include="Citerator.h">
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="Cnode.h">
