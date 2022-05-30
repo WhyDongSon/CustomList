@@ -33,9 +33,9 @@ Clist<T>::Clist(Clist& list)
 {
 	CreateDummyNode();
 
-	for (int32 i = 0; i < _nSize; i++)
+	for (auto it = list.begin() ; it != list.end() ; ++it)
 	{
-
+		list.push_back(*it);
 	}
 	
 	_nSize = list._nSize;
@@ -46,12 +46,12 @@ Clist<T>::Clist(Clist& list)
 template<typename T>
 Clist<T>::~Clist()
 {
-	FreeDummyNode();
-
 	for (int32 i = 0; i < _nSize; i++)
 	{
-
+		pop_back();
 	}
+
+	FreeDummyNode();
 }
 #pragma endregion
 
@@ -59,7 +59,9 @@ Clist<T>::~Clist()
 template<typename T>
 void Clist<T>::pop_back()
 {
+	Cnode<T> *LastNode = Dumynode[static_cast<int32>(DumyNode::Last)]->GetPreAdress();
 
+	DeleteNode(LastNode);
 }
 
 template<typename T>
@@ -71,7 +73,9 @@ void Clist<T>::push_back(const T& nElement)
 template<typename T>
 void Clist<T>::pop_front()
 {
+	Cnode<T> *FistNode = Dumynode[static_cast<int32>(DumyNode::First)]->GetNextAdress();
 
+	DeleteNode(FistNode);
 }
 
 template<typename T>
@@ -95,6 +99,40 @@ Citerator<T> Clist<T>::end()
  
  	return Result;
 }
+
+template<typename T>
+T& Clist<T>::front()
+{
+	Cnode<T> *FirstNode = Dumynode[static_cast<int32>(DumyNode::First)]->GetNextAdress();
+
+	return FirstNode->GetValue();
+}
+
+template<typename T>
+T& Clist<T>::back()
+{
+	Cnode<T>* LastNode = Dumynode[static_cast<int32>(DumyNode::Last)]->GetPreAdress();
+
+	return LastNode->GetValue();
+}
+
+template<typename T>
+Citerator<T> Clist<T>::insert(Citerator<T>& it, T value)
+{
+	Cnode<T>* node = it.GetNode();
+	it.SetNode(AddNode(node, value));
+
+	return it;
+}
+
+template<typename T>
+Citerator<T> Clist<T>::erase(Citerator<T>& it)
+{
+	Cnode<T>* node = it.GetNode();
+	it.SetNode(DeleteNode(node));
+
+	return it;
+}
 #pragma endregion
 
 #pragma region Ä¿½ºÅÒ ÇÔ¼ö
@@ -112,11 +150,15 @@ void Clist<T>::CreateDummyNode()
 template<typename T>
 void Clist<T>::FreeDummyNode()
 {
-	//delete[] Dumynode;
+	for (int32 i = 0; i < static_cast<int32>(DumyNode::DumyNode_Max); i++)
+	{
+		delete Dumynode[i];
+		Dumynode[i] = nullptr;
+	}
 }
 
 template<typename T>
-void Clist<T>::AddNode(Cnode<T>* Pos, const T& nValue)
+Cnode<T>* Clist<T>::AddNode(Cnode<T>* Pos, const T& nValue)
 {
 	Cnode<T>* newNode = new Cnode<T>(nValue);
 
@@ -128,12 +170,27 @@ void Clist<T>::AddNode(Cnode<T>* Pos, const T& nValue)
 	Pos->SetPreAdress(newNode);
 
 	_nSize++;
+
+	return newNode;
 }
 
 template<typename T>
-void Clist<T>::DeleteNode(Cnode<T>* Pos)
+Cnode<T>* Clist<T>::DeleteNode(Cnode<T>* Pos)
 {
-	delete[] Pos;
+	Cnode<T>* PreNode = Pos->GetPreAdress();
+	Cnode<T>* NextNode = Pos->GetNextAdress();
+
+	PreNode->SetNextAdress(NextNode);
+	NextNode->SetPreAdress(PreNode);
+
+	if (Pos)
+	{
+		delete Pos;
+		Pos = nullptr;
+	}
+
 	_nSize--;
+
+	return NextNode;
 }
 #pragma endregion

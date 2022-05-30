@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <functional>
 
 // 데이터형 정의
 using int8 = __int8;
@@ -12,6 +13,8 @@ using uint32 = unsigned __int32;
 using uint64 = unsigned __int64;
 
 using boolean = bool;
+
+using namespace std;
 
 //Node
 enum class DumyNode

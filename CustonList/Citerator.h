@@ -16,7 +16,9 @@ public:
 	boolean operator!=(const Citerator& node);
 	T& operator*();
 
+	Cnode<T>* GetNode() { return _node; }
+	void	  SetNode(Cnode<T>* node) { _node = node; }
+
 private:
 	Cnode<T>* _node;
 };
-

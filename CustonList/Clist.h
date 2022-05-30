@@ -17,6 +17,8 @@ public:
 	void pop_front();
 	void push_back(const T& nElement);
 	void pop_back();
+	T& back();
+	T& front();
 
 	boolean empty() { return (_nSize == 0); }
 	int32 size() { return _nSize; }
@@ -25,10 +27,12 @@ public:
 	using iterator = Citerator<T>;
 	iterator begin();
 	iterator end();
+	iterator insert(iterator& it, T value);
+	iterator erase(iterator& it);
 
 private:
-	void AddNode(Cnode<T>* Pos, const T& nValue);
-	void DeleteNode(Cnode<T>* Pos);
+	Cnode<T>* AddNode(Cnode<T>* Pos, const T& nValue);
+	Cnode<T>* DeleteNode(Cnode<T>* Pos);
 	void CreateDummyNode();
 	void FreeDummyNode();
 
